@@ -1,0 +1,27 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1789001439994,
+      "tag": "0000_real_inertia",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1789001500000,
+      "tag": "0001_backend_ecommerce",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1789004900000,
+      "tag": "0002_affiliate_system",
+      "breakpoints": true
+    }
+  ]
+}
