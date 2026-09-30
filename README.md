@@ -74,10 +74,10 @@ INITIAL_ADMIN_PASSWORD="MarketPam2026!"
 MONCASH_CLIENT_ID="votre_client_id"
 MONCASH_CLIENT_SECRET="votre_client_secret"
 MONCASH_MODE="sandbox"
-MONCASH_USD_TO_HTG_RATE="votre_taux_HTG_par_USD"
+MONCASH_USD_TO_HTG_RATE="135"
 ```
 
-Le checkout MonCash convertit le total USD en HTG à partir du taux marchand configuré. Appliquez également la migration `0004_moncash_payments`, puis enregistrez `https://votre-domaine-public/api/moncash/return` comme URL de retour dans le portail marchand MonCash. Testez d'abord avec les identifiants sandbox; passez `MONCASH_MODE` à `production` seulement après validation Digicel.
+Le checkout MonCash convertit le total USD en HTG au taux par défaut de 135 HTG/USD; la variable `MONCASH_USD_TO_HTG_RATE` permet de le remplacer dans Railway. Appliquez également la migration `0004_moncash_payments`, puis enregistrez `https://votre-domaine-public/api/moncash/return` comme URL de retour dans le portail marchand MonCash. Testez d'abord avec les identifiants sandbox; passez `MONCASH_MODE` à `production` seulement après validation Digicel.
 
 ### 3. Exécuter les Migrations
 Appliquez les migrations Drizzle sur la base PostgreSQL (préserve l'intégralité des 24 produits existants) :

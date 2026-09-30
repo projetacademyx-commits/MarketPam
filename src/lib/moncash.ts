@@ -28,9 +28,9 @@ function getConfig() {
 }
 
 export function getMonCashAmount(usdCents: number) {
-  const rate = Number(process.env.MONCASH_USD_TO_HTG_RATE);
+  const rate = Number(process.env.MONCASH_USD_TO_HTG_RATE?.trim() || "135");
   if (!Number.isFinite(rate) || rate <= 0) {
-    throw new Error("Configurez MONCASH_USD_TO_HTG_RATE avec le taux USD/HTG de votre compte marchand.");
+    throw new Error("MONCASH_USD_TO_HTG_RATE doit être un taux USD/HTG positif.");
   }
   const amount = Math.round((usdCents / 100) * rate);
   if (!Number.isSafeInteger(amount) || amount < 1) {
