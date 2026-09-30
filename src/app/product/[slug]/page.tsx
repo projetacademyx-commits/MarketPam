@@ -103,6 +103,8 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
               image={product.images[0] ?? ""}
               colors={product.colors}
               stock={product.stock}
+              affiliateUrl={product.affiliateUrl}
+              isAffiliate={product.isAffiliate}
             />
           </div>
 

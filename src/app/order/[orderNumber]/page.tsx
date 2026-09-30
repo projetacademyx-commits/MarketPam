@@ -23,16 +23,26 @@ export default async function OrderPage({
   return (
     <div className="mx-auto max-w-4xl px-5 py-14 lg:px-8 space-y-8">
       <div className="animate-fade-up rounded-3xl border border-ink/10 bg-white/70 p-8 lg:p-12">
-        <div className="flex h-14 w-14 items-center justify-center rounded-full bg-clay text-2xl text-white">
-          ✓
+        <div className={`flex h-14 w-14 items-center justify-center rounded-full text-2xl text-white ${order.paymentStatus === "paid" || order.paymentStatus === "due_on_delivery" ? "bg-clay" : "bg-amber-500"}`}>
+          {order.paymentStatus === "paid" || order.paymentStatus === "due_on_delivery" ? "✓" : "…"}
         </div>
-        <p className="text-eyebrow mt-6 text-clay">Commande confirmée avec succès</p>
+        <p className="text-eyebrow mt-6 text-clay">
+          {order.paymentStatus === "paid"
+            ? "Paiement MonCash confirmé"
+            : order.paymentStatus === "due_on_delivery"
+              ? "Commande confirmée — paiement à la livraison"
+              : order.paymentStatus === "failed"
+                ? "Paiement MonCash non confirmé"
+                : "Commande enregistrée — paiement en attente"}
+        </p>
         <h1 className="font-display mt-3 text-4xl leading-tight lg:text-5xl">
           Merci pour votre confiance, {order.fullName.split(" ")[0]}.
         </h1>
         <p className="mt-4 text-[15px] leading-relaxed text-ink-soft">
           Votre commande <span className="font-mono font-semibold text-ink">{order.orderNumber}</span> est
-          enregistrée. Un e-mail récapitulatif a été envoyé à l&apos;adresse {order.email}.
+          {order.paymentStatus === "paid" || order.paymentStatus === "due_on_delivery"
+            ? ` confirmée. Un e-mail récapitulatif a été envoyé à l'adresse ${order.email}.`
+            : " enregistrée. Sa confirmation dépend de la validation du paiement MonCash."}
         </p>
 
         {/* Barre de progression et suivi de livraison en direct */}
@@ -75,7 +85,7 @@ export default async function OrderPage({
             <dd className="text-ink">{formatPrice(order.tax)}</dd>
           </div>
           <div className="flex justify-between border-t border-ink/10 pt-3">
-            <dt className="font-display text-lg">Total payé</dt>
+            <dt className="font-display text-lg">{order.paymentStatus === "paid" ? "Total payé" : "Total de la commande"}</dt>
             <dd className="font-display text-lg">{formatPrice(order.total)}</dd>
           </div>
         </dl>

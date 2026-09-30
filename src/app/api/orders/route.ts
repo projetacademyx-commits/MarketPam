@@ -33,7 +33,27 @@ export async function POST(request: Request) {
       );
     }
 
-    const { items, shippingMethod, address, city, postalCode, country, fullName } = parsed.data;
+    if (parsed.data.paymentMethod !== "cod") {
+      return NextResponse.json(
+        { error: "Utilisez le parcours de paiement sécurisé MonCash." },
+        { status: 400 },
+      );
+    }
+
+    const {
+      items,
+      shippingMethod,
+      paymentMethod = "card",
+      cardBrand,
+      latitude,
+      longitude,
+      locationAccuracy,
+      address,
+      city,
+      postalCode,
+      country,
+      fullName,
+    } = parsed.data;
 
     // 2. Vérification et calcul des prix sur les produits réels en base
     const slugs = [...new Set(items.map((i) => i.slug))];
@@ -76,6 +96,12 @@ export async function POST(request: Request) {
       postalCode: postalCode.slice(0, 40),
       country: country.slice(0, 120),
       shippingMethod,
+      paymentMethod,
+      paymentStatus: "due_on_delivery",
+      cardBrand: cardBrand || null,
+      latitude: latitude || null,
+      longitude: longitude || null,
+      locationAccuracy: locationAccuracy || null,
       subtotal,
       shipping,
       tax,

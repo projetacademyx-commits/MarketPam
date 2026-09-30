@@ -28,7 +28,13 @@ function LoginForm() {
         body: JSON.stringify({ email, password }),
       });
 
-      const data = await res.json();
+      let data: any = {};
+      try {
+        data = await res.json();
+      } catch {
+        throw new Error("Une erreur inattendue est survenue. Veuillez vérifier votre connexion au serveur.");
+      }
+
       if (!res.ok) {
         throw new Error(data.error || "Adresse email ou mot de passe incorrect.");
       }

@@ -76,6 +76,9 @@ export const products = pgTable("products", {
   stock: integer("stock").notNull().default(25),
   featured: boolean("featured").notNull().default(false),
   badge: varchar("badge", { length: 40 }),
+  affiliateUrl: text("affiliate_url"),
+  isAffiliate: boolean("is_affiliate").notNull().default(false),
+  isActive: boolean("is_active").notNull().default(true),
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
 });
 
@@ -101,6 +104,13 @@ export const orders = pgTable("orders", {
   postalCode: varchar("postal_code", { length: 40 }).notNull().default(""),
   country: varchar("country", { length: 120 }).notNull().default(""),
   shippingMethod: varchar("shipping_method", { length: 60 }).notNull().default("standard"),
+  paymentMethod: varchar("payment_method", { length: 60 }).notNull().default("card"), // 'card' | 'cod'
+  cardBrand: varchar("card_brand", { length: 40 }),
+  paymentStatus: varchar("payment_status", { length: 40 }).notNull().default("paid"),
+  moncashOrderId: varchar("moncash_order_id", { length: 32 }).unique(),
+  latitude: text("latitude"),
+  longitude: text("longitude"),
+  locationAccuracy: text("location_accuracy"),
   subtotal: integer("subtotal").notNull(),
   shipping: integer("shipping").notNull().default(0),
   tax: integer("tax").notNull().default(0),

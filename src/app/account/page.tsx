@@ -29,6 +29,11 @@ type OrderData = {
   postalCode: string;
   country: string;
   shippingMethod: string;
+  paymentMethod?: string | null;
+  cardBrand?: string | null;
+  latitude?: string | null;
+  longitude?: string | null;
+  locationAccuracy?: string | null;
   subtotal: number;
   shipping: number;
   tax: number;
@@ -464,7 +469,7 @@ function AccountContent() {
                         <dd>{formatPrice(selectedOrder.subtotal)}</dd>
                       </div>
                       <div className="flex justify-between text-ink-soft">
-                        <dt>Livraison</dt>
+                        <dt>Livraison ({selectedOrder.shippingMethod})</dt>
                         <dd>{selectedOrder.shipping === 0 ? "Offerte" : formatPrice(selectedOrder.shipping)}</dd>
                       </div>
                       <div className="flex justify-between text-ink-soft">
@@ -472,16 +477,48 @@ function AccountContent() {
                         <dd>{formatPrice(selectedOrder.tax)}</dd>
                       </div>
                       <div className="flex justify-between border-t border-ink/10 pt-2 text-sm font-bold text-ink">
-                        <dt>Total payé</dt>
-                        <dd>{formatPrice(selectedOrder.total)}</dd>
+                        <dt>Total</dt>
+                        <dd className="text-clay">{formatPrice(selectedOrder.total)}</dd>
                       </div>
                     </dl>
 
-                    <div className="mt-4 rounded-lg bg-sand/60 p-3 text-xs text-ink-soft">
-                      <p className="font-medium text-ink">Adresse de livraison :</p>
-                      <p className="mt-0.5">
+                    {/* Mode de règlement */}
+                    <div className="mt-4 flex items-center justify-between rounded-xl border border-ink/10 bg-white p-3 text-xs">
+                      <span className="text-ink-soft">Mode de règlement :</span>
+                      <span className="font-semibold text-ink flex items-center gap-1.5">
+                        {selectedOrder.paymentMethod === "cod" ? (
+                          <>💵 Paiement à la livraison</>
+                        ) : selectedOrder.cardBrand === "visa" ? (
+                          <>💳 Carte Visa</>
+                        ) : selectedOrder.cardBrand === "mastercard" ? (
+                          <>💳 Mastercard</>
+                        ) : (
+                          <>💳 Carte Bancaire</>
+                        )}
+                      </span>
+                    </div>
+
+                    <div className="mt-3 rounded-xl bg-sand/60 p-4 text-xs text-ink-soft space-y-2">
+                      <p className="font-semibold text-ink">Adresse de livraison :</p>
+                      <p>
                         {selectedOrder.fullName} · {selectedOrder.address}, {selectedOrder.city} {selectedOrder.postalCode}, {selectedOrder.country}
                       </p>
+                      {selectedOrder.latitude && selectedOrder.longitude ? (
+                        <div className="mt-2 flex items-center justify-between rounded-lg bg-emerald-50 border border-emerald-200 p-2.5 text-[11px] text-emerald-900">
+                          <div>
+                            <span className="font-bold">📍 Coordonnées GPS livreur :</span>{" "}
+                            <span className="font-mono">{selectedOrder.latitude}, {selectedOrder.longitude}</span>
+                          </div>
+                          <a
+                            href={`https://www.google.com/maps?q=${selectedOrder.latitude},${selectedOrder.longitude}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="font-semibold text-emerald-700 underline hover:text-emerald-900"
+                          >
+                            Voir sur Maps ↗
+                          </a>
+                        </div>
+                      ) : null}
                     </div>
                   </div>
                 </div>

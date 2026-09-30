@@ -33,6 +33,9 @@ async function runSeed() {
         stock: p.stock,
         featured: p.featured ?? false,
         badge: p.badge ?? null,
+        affiliateUrl: p.affiliateUrl ?? null,
+        isAffiliate: p.isAffiliate ?? false,
+        isActive: p.isActive ?? true,
       })),
     )
     .onConflictDoNothing();

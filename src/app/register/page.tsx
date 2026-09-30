@@ -32,7 +32,13 @@ function RegisterForm() {
         body: JSON.stringify(form),
       });
 
-      const data = await res.json();
+      let data: any = {};
+      try {
+        data = await res.json();
+      } catch {
+        throw new Error("Une erreur inattendue est survenue. Veuillez vérifier votre connexion à la base de données.");
+      }
+
       if (!res.ok) {
         throw new Error(data.error || "Une erreur est survenue lors de l'inscription.");
       }

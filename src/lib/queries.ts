@@ -58,22 +58,24 @@ export async function getCategory(slug: string): Promise<Category | undefined> {
 export async function getProducts(filters: ProductFilters = {}): Promise<ProductWithStats[]> {
   await ensureSeeded();
 
-  const conditions = [];
+  const conditions: (ReturnType<typeof eq> | ReturnType<typeof inArray> | ReturnType<typeof gte> | ReturnType<typeof lte> | ReturnType<typeof or> | ReturnType<typeof sql>)[] = [
+    eq(products.isActive, true),
+  ];
   if (filters.category?.length) conditions.push(inArray(products.categorySlug, filters.category));
   if (filters.brands?.length) conditions.push(inArray(products.brand, filters.brands));
   if (typeof filters.minPrice === "number") conditions.push(gte(products.price, filters.minPrice));
   if (typeof filters.maxPrice === "number") conditions.push(lte(products.price, filters.maxPrice));
   if (filters.q) {
     const term = `%${filters.q}%`;
-    conditions.push(
-      or(ilike(products.name, term), ilike(products.summary, term), ilike(products.brand, term)),
-    );
+    const searchCond = or(ilike(products.name, term), ilike(products.summary, term), ilike(products.brand, term));
+    if (searchCond) conditions.push(searchCond);
   }
   if (filters.tags?.length) {
     const tagConditions = filters.tags.map(
       (tag) => sql`${products.tags} @> ${JSON.stringify([tag])}::jsonb`,
     );
-    conditions.push(or(...tagConditions));
+    const tagsCond = or(...tagConditions);
+    if (tagsCond) conditions.push(tagsCond);
   }
 
   const sortKey: SortKey = filters.sort ?? "featured";

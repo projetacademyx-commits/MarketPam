@@ -53,6 +53,11 @@ export const createOrderSchema = z.object({
     )
     .min(1, "Votre panier est vide"),
   shippingMethod: z.enum(["standard", "express", "overnight"]).default("standard"),
+  paymentMethod: z.enum(["moncash", "cod"]).default("moncash"),
+  cardBrand: z.string().optional(),
+  latitude: z.string().optional(),
+  longitude: z.string().optional(),
+  locationAccuracy: z.string().optional(),
   fullName: z.string().trim().min(2, "Nom complet requis"),
   email: z.string().trim().email("Email requis").toLowerCase(),
   address: z.string().trim().min(4, "Adresse requise"),
@@ -86,4 +91,7 @@ export const adminProductSchema = z.object({
   stock: z.number().int().min(0).default(25),
   featured: z.boolean().default(false),
   badge: z.string().nullable().optional(),
+  affiliateUrl: z.string().nullable().optional(),
+  isAffiliate: z.boolean().default(false),
+  isActive: z.boolean().default(true),
 });

@@ -96,9 +96,132 @@ export type SeedProduct = {
   stock: number;
   featured?: boolean;
   badge?: string;
+  affiliateUrl?: string;
+  isAffiliate?: boolean;
+  isActive?: boolean;
 };
 
 export const seedProducts: SeedProduct[] = [
+  {
+    slug: "brosse-a-dents-electrique-ultrasonique",
+    name: "Brosse à Dents Électrique Ultrasonique 6 Vitesses",
+    brand: "AliExpress Choice",
+    categorySlug: "beauty",
+    summary: "Nettoyeur de dents ultrasonique étanche IPX7 avec 6 modes de vibration, poils doux Dupont et charge rapide USB.",
+    description:
+      "Brosse à dents électrique ultrasonique Mode Six vitesses, cheveux doux pour la maison, chargement USB, nettoyeur de dents étanche pour adulte, ensemble automatique pour Couple. Idéale pour éliminer efficacement la plaque dentaire et blanchir les dents en douceur.",
+    price: 109,
+    compareAtPrice: 888,
+    images: [
+      px(8101673),
+      px(8015807),
+      px(7796461),
+    ],
+    highlights: [
+      "6 modes de vibration intelligents",
+      "Poils souples haute précision Dupont",
+      "Étanchéité IPX7 lavable sous l'eau",
+      "Batterie longue durée rechargeable USB",
+    ],
+    tags: ["bestseller", "promo", "aliexpress"],
+    colors: ["Blanc Perle", "Noir Mat", "Rose Pastel"],
+    stock: 850,
+    featured: true,
+    badge: "88% OFF",
+    affiliateUrl: "https://s.click.aliexpress.com/e/_c4tpqGYH",
+    isAffiliate: true,
+    isActive: true,
+  },
+  {
+    slug: "montre-connectee-smartwatch-ultra",
+    name: "Montre Connectée Smartwatch Ultra Écran HD & Santé",
+    brand: "AliExpress Choice",
+    categorySlug: "tech",
+    summary: "Suivi fréquence cardiaque, SpO2, sommeil, notifications d'appels et plus de 100 modes sportifs.",
+    description:
+      "Design élégant en alliage d'aluminium avec écran tactile HD ultra-lumineux. Suivez votre santé en temps réel, recevez vos notifications et gérez votre musique directement au poignet avec une autonomie record de 14 jours.",
+    price: 1899,
+    compareAtPrice: 5999,
+    images: [
+      px(8038334),
+      px(30428605),
+      px(36230830),
+    ],
+    highlights: [
+      "Écran tactile HD couleur 1.95 pouces",
+      "Capteurs cardio-fréquence & oxygène SpO2",
+      "Étanche immersion 5ATM",
+      "Autonomie 14 jours par charge",
+    ],
+    tags: ["new", "bestseller", "aliexpress"],
+    colors: ["Noir Minuit", "Argent Sidéral", "Orange Sport"],
+    stock: 420,
+    featured: true,
+    badge: "Bestseller",
+    affiliateUrl: "https://s.click.aliexpress.com/e/_c4tpqGYH",
+    isAffiliate: true,
+    isActive: true,
+  },
+  {
+    slug: "ecouteurs-sans-fil-bluetooth-tws",
+    name: "Écouteurs Sans Fil TWS Bluetooth 5.3 avec Réduction de Bruit",
+    brand: "AliExpress Choice",
+    categorySlug: "tech",
+    summary: "Son stéréo immersif Hi-Fi, microphone HD réduction de bruit active et boîtier avec affichage LED.",
+    description:
+      "Technologie Bluetooth 5.3 avec connexion instantanée, latence ultra-faible pour vidéos et jeux, et isolation acoustique parfaite. Jusqu'à 32 heures d'écoute totale avec le boîtier de charge rapide.",
+    price: 999,
+    compareAtPrice: 3499,
+    images: [
+      px(11063287),
+      px(3563627),
+      px(36130481),
+    ],
+    highlights: [
+      "Bluetooth 5.3 sans décalage",
+      "Microphones avec réduction de bruit ambiant",
+      "Affichage digital du niveau de batterie",
+      "Design ergonomique ultra-léger",
+    ],
+    tags: ["promo", "aliexpress"],
+    colors: ["Noir Mat", "Blanc Pur", "Bleu Nuit"],
+    stock: 950,
+    featured: true,
+    badge: "Promo Flash",
+    affiliateUrl: "https://s.click.aliexpress.com/e/_c4tpqGYH",
+    isAffiliate: true,
+    isActive: true,
+  },
+  {
+    slug: "diffuseur-huiles-essentielles-flamme-led",
+    name: "Diffuseur d'Huiles Essentielles Effet Flamme LED & Aromathérapie",
+    brand: "AliExpress Choice",
+    categorySlug: "home",
+    summary: "Humidificateur d'air ultrasonique ultra-silencieux avec jeu de lumière flamme chaleureuse.",
+    description:
+      "Créez une atmosphère relaxante et parfumée dans votre intérieur. Combine une brume d'aromathérapie ultrafine et une simulation de flamme à LED douce. Arrêt automatique dès que le réservoir est vide.",
+    price: 1499,
+    compareAtPrice: 4200,
+    images: [
+      px(33105316),
+      px(17619624),
+      px(6476112),
+    ],
+    highlights: [
+      "Effet visuel flamme chaleureuse 3D",
+      "Diffusion ultrasonique huiles essentielles",
+      "Protection coupure automatique sans eau",
+      "Fonctionnement ultra-silencieux < 30dB",
+    ],
+    tags: ["bestseller", "home", "aliexpress"],
+    colors: ["Noir Carbone", "Blanc Albâtre"],
+    stock: 310,
+    featured: true,
+    badge: "Coup de Cœur",
+    affiliateUrl: "https://s.click.aliexpress.com/e/_c4tpqGYH",
+    isAffiliate: true,
+    isActive: true,
+  },
   {
     slug: "cloud-brushed-oversized-tee",
     name: "Cloud-Brushed Oversized Tee",
